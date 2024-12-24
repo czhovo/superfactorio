@@ -1,5 +1,5 @@
 
-from todo import TODO
+from todo import *
 """
 def trigger(line):
     
@@ -22,18 +22,21 @@ def trigger(line):
     return todolist, nlspace
 """
 
-with open('trigger.py', 'w') as f:
-    f.write('def trigger(line):\n\n')
-    f.write('\tnlspace=len(line)-len(line.lstrip())\n\n')
-    f.write('\tline=line.strip()\n\n')
-    f.write('\ttodolist=[]\n\n')
+with open('triggers.py', 'w') as f:
+    print('create triggers.py\n')
 
-    flag=True
-    for todo in TODO:
-        f.write(f"{'\tif' if flag else '\n\telif'} line=='name = {todo['item']},':\n")
-        flag=False
-        for entry in todo['entry']:
-            f.write(f"\t\ttodolist.append(('{entry[0]}', '{entry[1]}', '{entry[2]}'))\n")
-        
-    f.write('\n\treturn todolist, nlspace\n')
-    f.close()
+    if len(TODO_base_entity_entities):
+        f.write('def trigger_base_entity_entities(line):\n\n')
+        f.write('\tnlspace=len(line)-len(line.lstrip())\n\n')
+        f.write('\tline=line.strip()\n\n')
+        f.write('\ttodolist=[]\n\n')
+
+        flag=True
+        for todo in TODO_base_entity_entities:
+            f.write(f"{'\tif' if flag else '\n\telif'} line=='name = {todo['item']},':\n")
+            flag=False
+            for entry in todo['entry']:
+                f.write(f"\t\ttodolist.append(('{entry[0]}', '{entry[1]}', '{entry[2]}'))\n")
+            
+        f.write('\n\treturn todolist, nlspace\n')
+

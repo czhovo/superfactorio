@@ -1,6 +1,7 @@
 import re
+import os
 
-from trigger import trigger
+from triggers import *
 
 def check(line, nlspace):
     if line.lstrip().startswith('}') and len(line)-len(line.lstrip())<nlspace:
@@ -72,7 +73,7 @@ with open('entity/entities.lua', 'r') as fi, open('entity/temp.lua', 'w') as fo:
 
 fl=open('log.txt', 'w')
 
-with open('entity/entities.lua', 'r') as fi, open('entity/temp.lua', 'w') as fo:
+with open('../base/prototypes/entity/entities.lua', 'r') as fi, open('../base/prototypes/entity/temp.lua', 'w') as fo:
 # with open('t1.lua', 'r') as fi, open('t2.lua', 'w') as fo:
     add_function_full_resistance(fo)
     while 1:
@@ -81,7 +82,7 @@ with open('entity/entities.lua', 'r') as fi, open('entity/temp.lua', 'w') as fo:
             break
 
         fo.write(line)
-        todolist, nlspace=trigger(line)
+        todolist, nlspace=trigger_base_entity_entities(line)
         if len(todolist):
             
             fl.write('\n')
@@ -110,6 +111,7 @@ with open('entity/entities.lua', 'r') as fi, open('entity/temp.lua', 'w') as fo:
                         break
                     else:
                         fo.write(line)
-        
+os.remove('../base/prototypes/entity/entities.lua')
+os.rename('../base/prototypes/entity/temp.lua', '../base/prototypes/entity/entities.lua')
 
 fl.close()
