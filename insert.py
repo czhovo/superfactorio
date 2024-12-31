@@ -10,24 +10,24 @@ def check(line, nlspace):
         assert(0)
 
 
-def insert(line, todo):
+def insert(line, adjustment):
     nlspace=len(line)-len(line.lstrip())
     lspace, line=line[:nlspace], line[nlspace:]
 
 
-    if todo[0]=='add_full_resistances':
+    if adjustment[0]=='add_full_resistances':
         return lspace+'resistances = full_resistances(),\n'+lspace+line
     
-    if todo[0]=='add_light':
+    if adjustment[0]=='add_light':
         return lspace+'light = {intensity = 0.9, size = 40, color = {1, 1, 0.75}},\n'+lspace+line
 
-    if line.startswith(todo[0]+' ='):
-        if todo[0]=='resistances':
+    if line.startswith(adjustment[0]+' ='):
+        if adjustment[0]=='resistances':
             return 'remove_resistances'
         
-        if line.startswith(todo[0]+' = '+todo[1]):
+        if line.startswith(adjustment[0]+' = '+adjustment[1]):
             # print(line)
-            return lspace+re.sub(todo[0]+' = '+todo[1], todo[0]+' = '+todo[2], line)
+            return lspace+re.sub(adjustment[0]+' = '+adjustment[1], adjustment[0]+' = '+adjustment[2], line)
         
         assert(0)
 
@@ -35,7 +35,7 @@ def insert(line, todo):
     return ''
 
 
-def add_function_full_resistance(fo):
+def add_full_resistances_function(fo):
     with open('full_resistances.lua', 'r') as fi:
         while 1:
             line=fi.readline()
@@ -71,7 +71,7 @@ with open('entity/entities.lua', 'r') as fi, open('entity/temp.lua', 'w') as fo:
 """
         
 
-fl=open('log.txt', 'w')
+"""fl=open('log.txt', 'w')
 
 with open('../base/prototypes/entity/entities.lua', 'r') as fi, open('../base/prototypes/entity/temp.lua', 'w') as fo:
 # with open('t1.lua', 'r') as fi, open('t2.lua', 'w') as fo:
@@ -115,3 +115,67 @@ os.remove('../base/prototypes/entity/entities.lua')
 os.rename('../base/prototypes/entity/temp.lua', '../base/prototypes/entity/entities.lua')
 
 fl.close()
+"""
+
+from todo import TODOS
+
+workdir=os.getcwd()
+
+
+with open('log.txt', 'w') as fl:
+    assert(fl)
+    for TODO in TODOS:
+        if TODO['special']:
+            pass
+        else:
+            if len(TODO['TODO']):
+                filepath=os.path.join(workdir, TODO['file'])
+                with open(filepath, 'r') as fi, open('temp.lua', 'w') as fo:
+                    assert(fi)
+                    assert(fo)
+                    if TODO['TODO'][0]['item']=='add_full_resistances_function':
+                        add_full_resistances_function(fo)
+                
+                    while 1:
+                        line=fi.readline()
+                        if not line:
+                            break
+
+                        fo.write(line)
+                        
+                        nlspace=len(line)-len(line.lstrip())
+                        line=line.strip()
+
+                        if line.startswith('name = '):
+                            item=line.split('name = ')[1].rstrip(',')
+                            for todo in TODO['TODO']:
+                                if item==todo['item']:
+                                    if len(todo['adjustments']):
+                                        fl.write('\n')
+                                        fl.write(line)
+                                        for adjustment in todo['adjustments']:
+                                            while 1:
+                                                line=fi.readline()
+                                                check(line, nlspace)
+                                                newline=insert(line, adjustment)
+                                                if len(newline):
+                                                    if newline=='remove_resistances':
+                                                        nesting=line.count('{')
+                                                        flag=False
+                                                        while 1:
+                                                            if nesting>0: flag=True
+                                                            nesting-=line.count('}')
+                                                            if nesting==0 and flag:
+                                                                break
+                                                            line=fi.readline()
+                                                            nesting+=line.count('{')
+                                                        fl.write('resistances removed\n')
+                                                    else:
+                                                        fo.write(newline)
+                                                        fl.write(f'changes on {adjustment[0]} applied\n')
+                                                    break
+                                                else:
+                                                    fo.write(line)
+                
+                os.remove(filepath)
+                os.rename('temp.lua', filepath)
