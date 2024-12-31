@@ -29,20 +29,24 @@ def insert(line, adjustment):
             # print(line)
             return lspace+re.sub(adjustment[0]+' = '+adjustment[1], adjustment[0]+' = '+adjustment[2], line)
         
+        # 有严重问题
+        if line.startswith(adjustment[0]+' = '+adjustment[2]):
+            return 'already_applied'
+
         assert(0)
 
     #print(f'{line} does not match {todo[0]}')          
     return ''
 
 
-def add_full_resistances_function(fo):
+def add_full_resistances_function(fo, fl):
     with open('full_resistances.lua', 'r') as fi:
         while 1:
             line=fi.readline()
             if not line:
                 break
             fo.write(line)
-
+    fl.write('\nfunction full resistance added\n')
 """
 
 
@@ -119,7 +123,7 @@ fl.close()
 
 from todo import TODOS
 
-workdir=os.getcwd()
+workdir=os.path.dirname(os.getcwd())
 
 
 with open('log.txt', 'w') as fl:
@@ -133,8 +137,10 @@ with open('log.txt', 'w') as fl:
                 with open(filepath, 'r') as fi, open('temp.lua', 'w') as fo:
                     assert(fi)
                     assert(fo)
+                    fl.write('\n')
+                    fl.write(TODO['file'])
                     if TODO['TODO'][0]['item']=='add_full_resistances_function':
-                        add_full_resistances_function(fo)
+                        add_full_resistances_function(fo, fl)
                 
                     while 1:
                         line=fi.readline()
@@ -153,6 +159,7 @@ with open('log.txt', 'w') as fl:
                                     if len(todo['adjustments']):
                                         fl.write('\n')
                                         fl.write(line)
+                                        fl.write('\n')
                                         for adjustment in todo['adjustments']:
                                             while 1:
                                                 line=fi.readline()
@@ -169,7 +176,11 @@ with open('log.txt', 'w') as fl:
                                                                 break
                                                             line=fi.readline()
                                                             nesting+=line.count('{')
-                                                        fl.write('resistances removed\n')
+                                                        fl.write('old resistances removed\n')
+                                                    # 有严重问题
+                                                    elif newline=='already_applied':
+                                                        fo.write(line)
+                                                        fl.write(f'changes on {adjustment[0]} have been applied before\n')
                                                     else:
                                                         fo.write(newline)
                                                         fl.write(f'changes on {adjustment[0]} applied\n')

@@ -3,7 +3,6 @@ TODOS=[
     {'special': False, 
      'file':'base/prototypes/entity/entities.lua', 'TODO':[
         {'item':'add_full_resistances_function'},
-        # character
         {'item': '"character"', 'adjustments': [
             ('add_full_resistances', '', ''),
             ('collision_box', '{{-0.2, -0.2}, {0.2, 0.2}}', '{{-0., -0.}, {0., 0.}}'),
@@ -18,7 +17,6 @@ TODOS=[
             ('running_speed', '0.15', '0.9'),
             ('mining_speed', '0.5', '50'),
         ]},
-        # inserters
         {'item': '"fast-inserter"', 'adjustments': [
             ('add_full_resistances', '', ''),
             ('energy_per_movement', '"7kJ"', '"7J"'),
@@ -106,6 +104,91 @@ TODOS=[
         ]},
         {'item': '"splitter"', 'adjustments':[
             ('speed', '0.03125', '0.625'),
+        ]},
+    ]},
+
+    # base/prototypes/entity/mining-drill.lua
+    {'special': False, 
+     'file':'base/prototypes/entity/mining-drill.lua', 'TODO':[
+        {'item': '"electric-mining-drill"', 'adjustments':[
+            ('mining_speed', '0.5', '50'),
+        ]},
+        {'item': '"pumpjack"', 'adjustments':[
+            ('mining_speed', '1', '60'),
+        ]},
+    ]},
+
+    # base/prototypes/entity/trains.lua
+    {'special': False, 
+     'file':'base/prototypes/entity/trains.lua', 'TODO':[
+        {'item': '"locomotive"', 'adjustments':[
+            ('max_speed', '1.2', '12'),
+            ('max_power', '"600kW"', '"6000kW"'),
+            ('braking_force', '10', '100'),
+        ]},
+        {'item': '"cargo-wagon"', 'adjustments':[
+            ('max_speed', '1.5', '6'),
+        ]},
+        {'item': '"fluid-wagon"', 'adjustments':[
+            ('max_speed', '1.5', '6'),
+        ]},
+    ]},
+
+    # base/prototypes/entity/flying-robots.lua
+    {'special': False, 
+     'file':'base/prototypes/entity/flying-robots.lua', 'TODO':[
+        {'item': '"logistic-robot"', 'adjustments':[
+            ('max_payload_size', '1', '10'),
+            ('speed', '0.05', '0.5'),
+        ]},
+        {'item': '"construction-robot"', 'adjustments':[
+            ('max_payload_size', '1', '10'),
+            ('speed', '0.06', '0.6'),
+        ]},
+    ]},
+
+    # base/prototypes/entity/turrets.lua
+    {'special': False, 
+     'file':'base/prototypes/entity/turrets.lua', 'TODO':[
+        {'item':'add_full_resistances_function'},
+        {'item': '"gun-turret"', 'adjustments':[
+            ('add_full_resistances', '', ''),
+        ]},
+    ]},
+
+    # base/prototypes/entity/resource.lua
+
+    # base/prototypes/recipe.lua
+
+    # base/prototypes/item.lua
+
+    # space-age/prototypes/entity/entities.lua
+    {'special': False, 
+     'file':'space-age/prototypes/entity/entities.lua', 'TODO':[
+        {'item':'add_full_resistances_function'},
+        {'item': '"asteroid-collector"', 'adjustments':[
+            ('add_full_resistances', '', ''),
+            ('inventory_size', '39', '399'),
+        ]},
+        {'item': '"cargo-bay"', 'adjustments':[
+            ('inventory_size_bonus', '20', '2000'),
+        ]},
+        {'item': '"electromagnetic-plant"', 'adjustments':[
+            ('crafting_speed', '2', '20'),
+        ]},
+        {'item': '"foundry"', 'adjustments':[
+            ('crafting_speed', '4', '40'),
+        ]},
+        {'item': '"thruster"', 'adjustments':[
+            ('max_performance', '{fluid_volume = 0.8, fluid_usage = 2, effectivity = 0.51}', '{fluid_volume = 0.8, fluid_usage = 2, effectivity = 5.1}'),
+        ]},
+    ]},
+
+    # space-age/prototypes/entity/big-mining-drill.lua
+    {'special': False, 
+     'file':'space-age/prototypes/entity/big-mining-drill.lua', 'TODO':[
+        {'item': '"big-mining-drill"', 'adjustments':[
+            ('mining_speed', '2.5', '25'),
         ]},
     ]},
 ]
