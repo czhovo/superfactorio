@@ -157,10 +157,13 @@ TODOS=[
     ]},
 
     # base/prototypes/entity/resource.lua
+    # 调整函数local function resource()，不能直接用name定位
 
     # base/prototypes/recipe.lua
+    # 解锁制作部分必要物品
 
     # base/prototypes/item.lua
+    # 好像没什么特别的地方，我也不知道为什么昨天晚上没写完跳过了
 
     # space-age/prototypes/entity/entities.lua
     {'special': False, 
@@ -191,4 +194,18 @@ TODOS=[
             ('mining_speed', '2.5', '25'),
         ]},
     ]},
+
+    # space-age/prototypes/technology.lua
+    {'special': True, 
+     'file':'space-age/prototypes/technology.lua', 'TODO':[
+        {'item': '"agricultural-science-pack"', 'adjustments':[
+            ('prerequisites', '', ''),  # 这里原代码换行了要特殊处理
+        ]},
+        # 还要修改其他必要草星科技的解锁条件
+    ]},
+
+    # space-age/prototypes/recipe.lua
+    # 提高雷星废料回收时产出ice和holmium-ore的概率，可能不能直接用name定位
+    # 调整草星科技瓶的制造条件和材料
+    # 添加火星矿产增产计划
 ]

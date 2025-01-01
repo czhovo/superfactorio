@@ -27,7 +27,7 @@ def insert(line, adjustment):
             # print(line)
             return lspace+re.sub(adjustment[0]+' = '+adjustment[1], adjustment[0]+' = '+adjustment[2], line)
         
-        # 有严重问题
+        # something is wrong with that and may cause problems
         if line.startswith(adjustment[0]+' = '+adjustment[2]):
             return 'already_applied'
 
@@ -104,7 +104,7 @@ if __name__=='__main__':
                                                                 line=fi.readline()
                                                                 nesting+=line.count('{')
                                                             fl.write('old resistances removed\n')
-                                                        # 有严重问题
+                                                        # something is wrong with that and may cause problems
                                                         elif newline=='already_applied':
                                                             fo.write(line)
                                                             fl.write(f'changes on {adjustment[0]} have been applied before\n')
