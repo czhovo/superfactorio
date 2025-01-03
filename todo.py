@@ -191,7 +191,7 @@ TODOS=[
         {'item': '"coal"', 'adjustments':[
             ('fuel_value', '"4MJ"', '"400GJ"'),
         ]},
-        {'item': '"ubmachine-gun"', 'adjustments':[
+        {'item': '"submachine-gun"', 'adjustments':[
             ('cooldown', '6', '0.1'),
             ('movement_slow_down_factor', '0.7', '0'),
             ('range', '18', '100'),
