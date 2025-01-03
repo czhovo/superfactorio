@@ -59,7 +59,12 @@ if __name__=='__main__':
             if TODO['special']:
                 if TODO['TODO'][0]['item']=='adjust_function_resource':
                     pass
-                elif 
+                elif TODO['TODO'][0]['item']=='adjust_agricultural_science_pack_technology':
+                    pass
+                elif TODO['TODO'][0]['item']=='adjust_agricultural_science_pack_recipe':
+                    pass
+                elif TODO['TODO'][0]['item']=='vulcanus_mineral_production_increase':
+                    pass
             else:
                 if len(TODO['TODO']):
                     filepath=os.path.join(workdir, TODO['file'])
@@ -70,16 +75,30 @@ if __name__=='__main__':
                         fl.write(TODO['file'])
                         if TODO['TODO'][0]['item']=='add_full_resistances_function':
                             add_full_resistances_function(fo, fl)
+                            remove_old_full_resistances=True
+                        else:
+                            remove_old_full_resistances=False
                     
                         while 1:
                             line=fi.readline()
                             if not line:
                                 break
 
+                            if remove_old_full_resistances and line.startswith('local full_resistances = function()'):
+                                while 1:
+                                    line=fi.readline()
+                                    if line.startswith('end'):
+                                        fl.write('\nold full resistances function removed\n')
+                                        remove_old_full_resistances=False
+                                        break
+                                continue
+                            
                             fo.write(line)
                             
                             nlspace=len(line)-len(line.lstrip())
                             line=line.strip()
+
+
 
                             if line.startswith('name = '):
                                 item=line.split('name = ')[1].rstrip(',')
@@ -120,4 +139,4 @@ if __name__=='__main__':
                     os.remove(filepath)
                     os.rename('temp.lua', filepath)
 
-    print('all changes applieds\n')
+    print('all changes applied\n')

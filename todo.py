@@ -234,21 +234,22 @@ TODOS=[
     # space-age/prototypes/technology.lua
     {'special': True, 
      'file':'space-age/prototypes/technology.lua', 'TODO':[
-        {'item': '"agricultural-science-pack"', 'adjustments':[
-            ('prerequisites', '', ''),  # 这里原代码换行了要特殊处理
-        ]},
+        {'item': 'adjust_agricultural_science_pack_technology'},
         # 还要修改其他必要草星科技的解锁条件
     ]},
 
     # space-age/prototypes/recipe.lua
     {'special': False, 
-     'file':'space-age/prototypes/technology.lua', 'TODO':[
-        {'item': '"agricultural-science-pack"', 'adjustments':[
-            ('prerequisites', '', ''),  # 这里原代码换行了要特殊处理
+     'file':'space-age/prototypes/recipe.lua', 'TODO':[
+        {'item': '"scrap-recycling"', 'adjustments':[
+            ('{type = "item", name = "ice",                    amount = 1, probability', '0.05', '0.25'), 
+            ('{type = "item", name = "holmium-ore",            amount = 1, probability', '0.01', '0.21'), 
         ]},
-        # 还要修改其他必要草星科技的解锁条件
     ]},
-    # 提高雷星废料回收时产出ice和holmium-ore的概率，可能不能直接用name定位
-    # 调整草星科技瓶的制造条件和材料
-    # 添加火星矿产增产计划
+
+    {'special': True, 
+     'file':'space-age/prototypes/recipe.lua', 'TODO':[
+         {'item': 'adjust_agricultural_science_pack_recipe'},
+         {'item': 'vulcanus_mineral_production_increase'},
+    ]},
 ]
