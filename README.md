@@ -5,8 +5,11 @@
 
 运行insert.py应用修改，如果程序正常退出，会显示all changes applied，可以通过log.txt查看成功应用的修改或排除错误
 
-## 待解决的问题
+## things to do
+提前解锁制造的物品
 
-没有移除原有的full_resistances函数
+处理四种特殊情况
 
 处理已经应用的修改时存在问题
+
+未测试
