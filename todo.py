@@ -157,13 +157,49 @@ TODOS=[
     ]},
 
     # base/prototypes/entity/resource.lua
-    # 调整函数local function resource()，不能直接用name定位
+    {'special': True, 
+     'file':'base/prototypes/entity/resource.lua', 'TODO':[
+         {'item':'adjust_function_resource'},
+    ]},
 
     # base/prototypes/recipe.lua
-    # 解锁制作部分必要物品
+    {'special': False, 
+     'file':'base/prototypes/recipe.lua', 'TODO':[
+        {'item': '""', 'adjustments':[
+            ('enabled', 'false', 'true'),
+        ]},
+        {'item': '""', 'adjustments':[
+            ('enabled', 'false', 'true'),
+        ]},
+        {'item': '""', 'adjustments':[
+            ('enabled', 'false', 'true'),
+        ]},
+        {'item': '""', 'adjustments':[
+            ('enabled', 'false', 'true'),
+        ]},
+        {'item': '""', 'adjustments':[
+            ('enabled', 'false', 'true'),
+        ]},
+        {'item': '""', 'adjustments':[
+            ('enabled', 'false', 'true'),
+        ]},
+    ]},
 
     # base/prototypes/item.lua
-    # 好像没什么特别的地方，我也不知道为什么昨天晚上没写完跳过了
+    {'special': False, 
+     'file':'base/prototypes/item.lua', 'TODO':[
+        {'item': '"coal"', 'adjustments':[
+            ('fuel_value', '"4MJ"', '"400GJ"'),
+        ]},
+        {'item': '"ubmachine-gun"', 'adjustments':[
+            ('cooldown', '6', '0.1'),
+            ('movement_slow_down_factor', '0.7', '0'),
+            ('range', '18', '100'),
+        ]},
+        {'item': '"firearm-magazine"', 'adjustments':[
+            ('damage', '{amount = 5, type = "physical"}', '{amount = 5000, type = "physical"}'),
+        ]},
+    ]},
 
     # space-age/prototypes/entity/entities.lua
     {'special': False, 
@@ -205,6 +241,13 @@ TODOS=[
     ]},
 
     # space-age/prototypes/recipe.lua
+    {'special': False, 
+     'file':'space-age/prototypes/technology.lua', 'TODO':[
+        {'item': '"agricultural-science-pack"', 'adjustments':[
+            ('prerequisites', '', ''),  # 这里原代码换行了要特殊处理
+        ]},
+        # 还要修改其他必要草星科技的解锁条件
+    ]},
     # 提高雷星废料回收时产出ice和holmium-ore的概率，可能不能直接用name定位
     # 调整草星科技瓶的制造条件和材料
     # 添加火星矿产增产计划

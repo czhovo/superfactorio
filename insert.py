@@ -57,7 +57,9 @@ if __name__=='__main__':
         assert(fl)
         for TODO in TODOS:
             if TODO['special']:
-                pass
+                if TODO['TODO'][0]['item']=='adjust_function_resource':
+                    pass
+                elif 
             else:
                 if len(TODO['TODO']):
                     filepath=os.path.join(workdir, TODO['file'])
